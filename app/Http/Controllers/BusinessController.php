@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use CodersFree\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -132,8 +133,29 @@ class BusinessController extends Controller
         ->firstOrFail();
 
     $products = $business->products;
-//dd($products,$business);
+
         //return view('shop', compact('business','products'));
-        return Inertia::render('Business/Shop',compact('products'));
+        return Inertia::render('Shop/Shop',compact('products','slug'));
+    }
+
+    public function add(Request $request)
+    {
+        //dd($request);
+        // dd(Cart::content());
+        $cartItem = Cart::add(
+            $request->product_id,
+            $request->name,
+            $request->quantity,
+            $request->price,
+            //[
+            //    'img' => $request->img,
+            //    'prueba' => $request->prueba
+            //]
+        );
+
+        // $items = $cartItem->toArray()['items'];
+
+        // dd(Cart::content());
+        return redirect()->back();
     }
 }

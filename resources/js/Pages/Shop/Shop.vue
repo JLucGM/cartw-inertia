@@ -6,10 +6,23 @@ import { ref } from 'vue';
 
 const page = usePage()
 const products = ref(page.props.products);
+const slug = page.props.slug;
 
 const onDeleteSuccess = (e) => {
     products.value = e.props.products;
 }
+
+const addProduct = (product) => {
+    router.post(route('cart.add'), {
+        product_id: product.id,
+        name: product.name,
+        quantity: 1,
+        price: product.price,
+        tax: 0 // Agregamos este parámetro con valor 0
+
+    });
+}
+
 
 </script>
 
@@ -19,7 +32,11 @@ const onDeleteSuccess = (e) => {
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Shop
         </h2>
-        
+
+        <Link :href="route('cart.index', { slug: slug })" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+  Ver carrito
+</Link>
+
     </div>
 
 
@@ -62,11 +79,18 @@ const onDeleteSuccess = (e) => {
                                 </td>
 
                                 <td className="px-6 py-4">
-                                    <div class="space-x-4">
-
-                                       
-                                    </div>
-                                </td>
+            <div class="space-x-4">
+                <form @submit.prevent="addProduct(product)">
+                    <input type="hidden" name="product_id" :value="product.id">
+                    <input type="hidden" name="name" :value="product.name">
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="price" :value="product.price">
+                    <button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                        Agregar al carrito
+                    </button>
+                </form>
+            </div>
+        </td>
                             </tr>
                         </tbody>
                     </table>

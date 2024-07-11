@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,15 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('{slug}', [BusinessController::class, 'shop'])->name('shop');
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+
+
+
+
+Route::get('/cart/{slug}', [CartController::class, 'index'])->name('cart.index');
+//Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/finalizar', [CartController::class, 'finalizarPedido'])->name('finalizarPedido');
+Route::delete('/carrito/{rowId}', [CartController::class, 'eliminarElemento'])->name('carrito.eliminar');
+//Route::get('/pedidos', [CartController::class, 'pedidos'])->name('pedidos');
+//Route::get('/pedidosShow/{id}', [CartController::class, 'pedidosShow'])->name('pedidosShow');
