@@ -14,6 +14,13 @@ const form = useForm({
     password: '',
     password_confirmation: '',
     terms: false,
+
+    name_business: "",
+    phone_business: "",
+    //avatar_business: null,
+    direction_business: "",
+    rif_business: "",
+    email_business: "",
 });
 
 const submit = () => {
@@ -84,6 +91,37 @@ const submit = () => {
                 />
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
+
+            <div>
+                                    <InputLabel for="name" value="Nombre" />
+                                    <TextInput id="name" v-model="form.name_business" type="text" class="mt-1 block w-full"
+                                        autofocus autocomplete="name" placeholder="Nombre" />
+                                    <InputError class="mt-2" :message="form.errors.name" />
+                                </div>
+                                <div>
+                                    <InputLabel for="email" value="email" />
+                                    <TextInput id="email" v-model="form.email_business" type="text" class="mt-1 block w-full"
+                                        placeholder="Telefono" />
+                                    <InputError class="mt-2" :message="form.errors.email" />
+                                </div>
+                                <div>
+                                    <InputLabel for="phone" value="Telefono" />
+                                    <TextInput id="phone" v-model="form.phone_business" type="text" class="mt-1 block w-full"
+                                        placeholder="Telefono" />
+                                    <InputError class="mt-2" :message="form.errors.phone" />
+                                </div>
+                                <div>
+                                    <InputLabel for="direction" value="Direction" />
+                                    <TextInput id="direction" v-model="form.direction_business" type="text"
+                                        class="mt-1 block w-full" placeholder="Telefono" />
+                                    <InputError class="mt-2" :message="form.errors.direction" />
+                                </div>
+                                <div>
+                                    <InputLabel for="rif" value="Rif" />
+                                    <TextInput id="rif" v-model="form.rif_business" type="text" class="mt-1 block w-full"
+                                        placeholder="Telefono" />
+                                    <InputError class="mt-2" :message="form.errors.rif" />
+                                </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
                 <InputLabel for="terms">

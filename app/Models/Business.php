@@ -13,7 +13,9 @@ class Business extends Model
         'email', 
         'phone', 
         'direction', 
-        'rif'
+        'rif',
+        'slug',
+
     ];
 
     public function users(): BelongsToMany
